@@ -1,1 +1,1 @@
-# Amazon Clone!
+# Full Stack E-Commerce Store!
