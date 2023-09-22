@@ -1,3 +1,5 @@
+import Header from "@/Components/Header";
+import Footer from "@/Components/Footer";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -16,8 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} w-full bg-main-bg text-darkText`}
+      >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )
