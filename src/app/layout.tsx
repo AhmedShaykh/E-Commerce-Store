@@ -1,4 +1,4 @@
-// import AuthProvider from "@/Components/AuthProvider";
+import AuthProvider from "@/Components/AuthProvider";
 import Header from "@/Components/Header";
 import Footer from "@/Components/Footer";
 import { Inter } from "next/font/google";
@@ -23,11 +23,11 @@ export default function RootLayout({
       <body
         className={`${inter.className} w-full bg-main-bg text-darkText`}
       >
-        {/* <AuthProvider> */}
-        <Header />
-        {children}
-        <Footer />
-        {/* </AuthProvider> */}
+        <AuthProvider>
+          <Header />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   )

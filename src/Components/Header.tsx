@@ -1,40 +1,32 @@
-import React from "react";
+import { authOptions } from "@/lib/auth";
 import Container from "./Container";
-import { FiSearch, FiLogOut } from "react-icons/fi";
-import { AiOutlineUser } from "react-icons/ai";
+import SignOut from "./SignOut";
+import Login from "./Login";
+import Logo from "./Logo";
+import { FiSearch } from "react-icons/fi";
+import { getServerSession } from "next-auth";
 import { IoMdCart } from "react-icons/io";
-import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 
-const Header = () => {
+const Header = async () => {
 
-    // const { data: session } = useSession();
+    const session = await getServerSession(authOptions);
 
     return (
         <div className="bg-bodyColor h-20 top-0 sticky z-50">
-            <Container className="h-full flex items-center gap-x-2   md:gap-x-5 justify-between">
+            <Container className="h-full flex items-center md:gap-x-5 justify-between md:justify-start">
                 <Link href="/">
-                    <img
-                        src="/Logo.webp"
-                        alt="Logo"
-                        className="xl:w-[90%] xl:h-full lg:w-[80%] lg:h-[90%] w-[70%] h-[80%]"
-                    />
+                    <Logo />
                 </Link>
 
-                <div className="w-[50%] lg:w-[65%] bg-white hidden md:flex items-center gap-x-1 border-[1px] border-lightText/50 rounded-full px-4 py-1.5 focus-within:border-orange-600 group">
+                <div className="w-full bg-white hidden md:flex items-center gap-x-1 border-[1px] border-lightText/50 rounded-full px-4 py-1.5 focus-within:border-orange-600 group">
                     <FiSearch className="text-gray-500 group-focus-within:text-darkText duration-200" />
                     <input
-                        type="text"
+                        className="placeholder:text-sm flex-1 outline-none"
                         placeholder="Search for Products"
-                        className="placeholder:text-sm flex-1 mx-2 outline-none"
+                        type="text"
                     />
-                </div>
-
-                <div className="headerDiv cursor-pointer">
-                    <AiOutlineUser className="text-2xl" />
-                    <p className="text-sm font-semibold">
-                        Login/Register
-                    </p>
                 </div>
 
                 <Link href={"/cart"}>
@@ -48,6 +40,24 @@ const Header = () => {
                         </span>
                     </div>
                 </Link>
+
+                {!session && (
+                    <Login />
+                )}
+
+                {session && (
+                    <Image
+                        src={session?.user?.image as string}
+                        alt="user image"
+                        width={50}
+                        height={50}
+                        className="rounded-full object-cover"
+                    />
+                )}
+
+                {session && (
+                    <SignOut />
+                )}
             </Container>
         </div>
     )
