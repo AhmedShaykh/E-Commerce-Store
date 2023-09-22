@@ -1,4 +1,4 @@
-import { productData } from "@/constants/data";
+import { productData } from "@/constants/productData";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
