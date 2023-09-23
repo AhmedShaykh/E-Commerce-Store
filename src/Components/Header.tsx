@@ -3,8 +3,9 @@ import Container from "./Container";
 import SignOut from "./SignOut";
 import Login from "./Login";
 import Logo from "./Logo";
-import { FiSearch } from "react-icons/fi";
 import { getServerSession } from "next-auth";
+import { useDispatch } from "react-redux";
+import { FiSearch } from "react-icons/fi";
 import { IoMdCart } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +13,8 @@ import Link from "next/link";
 const Header = async () => {
 
     const session = await getServerSession(authOptions);
+
+    // const dispatch = useDispatch();
 
     return (
         <div className="bg-bodyColor h-20 top-0 sticky z-50">

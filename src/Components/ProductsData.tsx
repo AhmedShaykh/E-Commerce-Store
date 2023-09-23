@@ -1,8 +1,12 @@
+"use client";
 import React, { FC } from "react";
 import { calculatePercentage } from "@/helpers";
 import FormattedPrice from "./FormattedPrice";
+import { addToCart } from "@/redux/cartSlice";
 import { ItemProps } from "../../Types";
+import toast, { Toaster } from "react-hot-toast";
 import { IoIosStar } from "react-icons/io";
+import { useDispatch } from "react-redux";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,6 +17,8 @@ const ProductsData: FC<ItemProps> = ({ item }) => {
             <IoIosStar />
         </span>
     ));
+
+    const dispatch = useDispatch();
 
     return (
         <div className="w-full rounded-lg overflow-hidden">
@@ -36,7 +42,6 @@ const ProductsData: FC<ItemProps> = ({ item }) => {
 
                 <div className="border-[1px] border-slate-300 border-t-0 px-2 py-4 flex flex-col gap-y-2 bg-white rounded-b-lg">
                     <p>{item?.title}</p>
-
                     <div className="flex items-center justify-between">
                         <div className="border-[1px] border-orange-600 py-1 px-4 rounded-full text-xs">
                             <p>{calculatePercentage(item?.price, item?.oldPrice)}% off</p>
@@ -55,6 +60,12 @@ const ProductsData: FC<ItemProps> = ({ item }) => {
                     <div className="flex items-center justify-between">
                         <button
                             className="bg-orange-600 px-4 py-2 text-sm tracking-wide rounded-full text-slate-100 hover:bg-orange-800 hover:text-white duration-200"
+                            onClick={() =>
+                                dispatch(addToCart(item)) &&
+                                toast.success(
+                                    `${item?.title.substring(0, 15)} Added Successfully...!`
+                                )
+                            }
                         >
                             Add To Cart
                         </button>
@@ -63,6 +74,7 @@ const ProductsData: FC<ItemProps> = ({ item }) => {
                     </div>
                 </div>
             </div>
+            <Toaster />
         </div>
     )
 };

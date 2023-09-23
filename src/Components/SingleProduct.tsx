@@ -1,9 +1,16 @@
+"use client";
 import React, { FC } from "react";
 import FormattedPrice from "./FormattedPrice";
+import { addToCart } from "@/redux/cartSlice";
+import toast, { Toaster } from "react-hot-toast";
 import { IoMdCart } from "react-icons/io";
+import { useDispatch } from "react-redux";
 import Image from "next/image";
 
 const SingleProduct: FC<any> = ({ product }) => {
+
+    const dispatch = useDispatch();
+
     return (
         <div className="grid lg:grid-cols-2 gap-5 bg-white p-4 rounded-lg">
             <div>
@@ -36,15 +43,22 @@ const SingleProduct: FC<any> = ({ product }) => {
 
                 <div
                     className="flex items-center cursor-pointer group"
+                    onClick={() =>
+                        dispatch(addToCart(product)) &&
+                        toast.success(
+                            `${product?.title.substring(0, 15)} added successfully!`
+                        )
+                    }
                 >
-                    <button className="bg-darkText text-slate-100 px-6 py-3 text-sm uppercase flex items-center border-r-[1px] border-r-slate-500">
-                        add to cart
+                    <button className="bg-darkText text-slate-100 px-6 py-3 text-sm flex items-center border-r-[1px] border-r-slate-500">
+                        Add To Cart
                     </button>
                     <span className="bg-darkText text-xl text-slate-100 w-12 flex items-center justify-center group-hover:bg-orange-500 duration-200 py-3">
                         <IoMdCart />
                     </span>
                 </div>
             </div>
+            <Toaster />
         </div>
     )
 };
