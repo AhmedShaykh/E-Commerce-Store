@@ -1,21 +1,11 @@
-import { authOptions } from "@/lib/auth";
+import SessionServer from "./SessionServer";
+import CartClient from "./CartClient";
 import Container from "./Container";
-import SignOut from "./SignOut";
-import Login from "./Login";
 import Logo from "./Logo";
-import { getServerSession } from "next-auth";
-import { useDispatch } from "react-redux";
 import { FiSearch } from "react-icons/fi";
-import { IoMdCart } from "react-icons/io";
-import Image from "next/image";
 import Link from "next/link";
 
-const Header = async () => {
-
-    const session = await getServerSession(authOptions);
-
-    // const dispatch = useDispatch();
-
+const Header = () => {
     return (
         <div className="bg-bodyColor h-20 top-0 sticky z-50">
             <Container className="h-full flex items-center md:gap-x-5 justify-between md:justify-start">
@@ -32,35 +22,10 @@ const Header = async () => {
                     />
                 </div>
 
-                <Link href={"/cart"}>
-                    <div className="bg-black hover:bg-slate-950 rounded-full text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-3 py-1.5 border-[1px] border-black hover:border-orange-600 duration-200 relative">
-                        <IoMdCart className="text-xl" />
-                        <p className="text-sm font-semibold">
-                            $0.00
-                        </p>
-                        <span className="bg-white text-orange-600 rounded-full text-xs font-semibold absolute -right-2 -top-1 w-5 h-5 flex items-center justify-center shadow-xl shadow-black">
-                            0
-                        </span>
-                    </div>
-                </Link>
+                <CartClient />
 
-                {!session && (
-                    <Login />
-                )}
+                <SessionServer />
 
-                {session && (
-                    <Image
-                        src={session?.user?.image as string}
-                        alt="user image"
-                        width={50}
-                        height={50}
-                        className="rounded-full object-cover"
-                    />
-                )}
-
-                {session && (
-                    <SignOut />
-                )}
             </Container>
         </div>
     )

@@ -17,6 +17,7 @@ export interface ItemProps {
 
 export interface StateProps {
     cart: {
+        length: ReactNode;
         productData: [];
         userInfo: {};
         orderData: {

@@ -46,7 +46,7 @@ const SingleProduct: FC<any> = ({ product }) => {
                     onClick={() =>
                         dispatch(addToCart(product)) &&
                         toast.success(
-                            `${product?.title.substring(0, 15)} added successfully!`
+                            `${product?.title.substring(0, 15)} Added Successfully...!`
                         )
                     }
                 >
