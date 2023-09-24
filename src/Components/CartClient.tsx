@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ProductsType, StateProps } from "../../Types";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IoMdCart } from "react-icons/io";
 import Link from "next/link";
 import FormattedPrice from "./FormattedPrice";
@@ -9,8 +9,6 @@ import FormattedPrice from "./FormattedPrice";
 const CartClient = () => {
 
     const [totalAmt, setTotalAmt] = useState<number>(0);
-
-    // const dispatch = useDispatch();
 
     const { productData, orderData } = useSelector(
         (state: StateProps) => state.cart
@@ -25,6 +23,7 @@ const CartClient = () => {
             amt += item.price * item.quantity;
 
             return;
+
         });
 
         setTotalAmt(amt);
