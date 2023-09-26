@@ -1,19 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { resetCart, saveOrder } from "@/redux/cartSlice";
 import { ProductsType, StateProps } from "../../Types";
 import FormattedPrice from "./FormattedPrice";
 import { useDispatch, useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSession } from "next-auth/react";
-import { resetCart, saveOrder } from "@/redux/cartSlice";
 
 const PaymentForm = () => {
 
     const [totalAmt, setTotalAmt] = useState<number>(0);
 
     const { productData, userInfo } = useSelector((state: StateProps) => state?.cart);
-
-    const { data: session } = useSession();
 
     const dispatch = useDispatch();
 
@@ -35,6 +33,8 @@ const PaymentForm = () => {
     const stripePromise = loadStripe(
         process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
     );
+
+    const { data: session } = useSession();
 
     const handleCheckout = async () => {
 

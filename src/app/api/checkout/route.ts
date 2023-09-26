@@ -21,9 +21,9 @@ export const POST = async (request: NextRequest) => {
                 product_data: {
                     name: item.title,
                     description: item.description,
-                    images: [item.image]
-                }
-            }
+                    images: [item.image],
+                },
+            },
         }));
 
         const session = await stripe.checkout.sessions.create({
@@ -31,14 +31,14 @@ export const POST = async (request: NextRequest) => {
             line_items: extractingItems,
             mode: "payment",
             success_url: `${process.env.NEXTAUTH_URL}/success`,
-            cancel_url: `${process.env.NEXTAUTH_URL}/checkout`,
+            cancel_url: `${process.env.NEXTAUTH_URL}/`,
             metadata: {
-                email
+                email,
             }
         });
 
         return NextResponse.json({
-            message: "Connection Is Active!",
+            message: "Connection Is Active...!",
             success: true,
             id: session.id
         });
