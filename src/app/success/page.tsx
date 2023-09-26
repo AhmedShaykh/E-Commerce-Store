@@ -1,4 +1,3 @@
-import React from "react";
 import Container from "@/Components/Container";
 import Link from "next/link";
 
@@ -6,7 +5,7 @@ const SuccessPage = () => {
     return (
         <Container className="flex items-center justify-center py-20">
             <div className="min-h-[400px] flex flex-col items-center justify-center gap-y-5">
-                <h2 className="text-4xl font-bold">
+                <h2 className="text-5xl font-bold">
                     Thank You For Your Order!
                 </h2>
 

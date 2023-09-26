@@ -30,14 +30,14 @@ const SingleProduct: FC<any> = ({ product }) => {
                         <FormattedPrice amount={product?.price} />
                     </p>
                 </div>
-                <p className="text-lightText">{product?.description}</p>
+                <p className="text-zinc-800">{product?.description}</p>
 
-                <div className="text-sm text-lightText flex flex-col">
+                <div className="text-sm text-zinc-800 flex flex-col">
                     <span>
-                        SKU: <span className="text-darkText">{product?._id}</span>
+                        SKU: <span className="text-zinc-800 font-bold">{product?._id}</span>
                     </span>
                     <span>
-                        Category: <span className="text-darkText">{product?.category}</span>
+                        Category: <span className="text-zinc-800 font-bold">{product?.category}</span>
                     </span>
                 </div>
 
